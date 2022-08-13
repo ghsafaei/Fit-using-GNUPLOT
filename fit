@@ -1,0 +1,20 @@
+#! /usr/bin/gnuplot
+
+
+
+do for [ii=100:110] {
+
+set fit errorvariables
+set fit quiet 
+set fit logfile
+
+f(x) = a * ( (1./sqrt(1.+(((x)/b)**2))) - ( 1./(sqrt(1.+(13.1/b)**2))) )**2.
+fit f(x) '57-'.ii.'Myr'  u 1:2   via a,b 
+
+set print "fit-data-Pleiades-57.txt"  append 
+print ii,  a,  b, a_err,b_err 
+
+}
+
+
+q
